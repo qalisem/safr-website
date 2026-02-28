@@ -64,11 +64,7 @@
       text-decoration: none;
     }
 
-    .nav-logo img {
-      width: 36px;
-      height: 36px;
-      object-fit: contain;
-    }
+    .nav-logo img { width: 36px; height: 36px; object-fit: contain; }
 
     .nav-brand {
       font-family: var(--font-display);
@@ -79,27 +75,9 @@
     }
 
     .nav-links { display: flex; gap: 28px; align-items: center; }
-
-    .nav-links a {
-      color: var(--text-dim);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-      transition: color 0.2s;
-    }
-
+    .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.3px; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
-
-    .nav-cta {
-      background: var(--purple) !important;
-      color: white !important;
-      padding: 8px 18px;
-      border-radius: 8px;
-      font-weight: 600 !important;
-      transition: opacity 0.2s;
-    }
-
+    .nav-cta { background: var(--purple) !important; color: white !important; padding: 8px 18px; border-radius: 8px; font-weight: 600 !important; transition: opacity 0.2s; }
     .nav-cta:hover { opacity: 0.85; }
 
     /* ── HERO ── */
@@ -127,8 +105,7 @@
     }
 
     .hero-logo {
-      width: 120px;
-      height: 120px;
+      width: 120px; height: 120px;
       object-fit: contain;
       margin-bottom: 32px;
       animation: fadeInUp 0.6s ease-out;
@@ -151,12 +128,7 @@
       animation: fadeInUp 0.6s ease-out 0.1s both;
     }
 
-    .hero-badge-dot {
-      width: 6px; height: 6px;
-      background: var(--gold);
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-    }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
 
     .hero h1 {
       font-family: var(--font-display);
@@ -212,111 +184,166 @@
     .btn-secondary:hover { border-color: rgba(255,255,255,0.15); }
     .btn svg { width: 18px; height: 18px; }
 
-    .hero-arabic {
-      margin-top: 56px;
-      font-size: 28px;
-      color: var(--gold);
-      opacity: 0.4;
-      font-weight: 300;
-      letter-spacing: 2px;
-      animation: fadeInUp 0.6s ease-out 0.5s both;
-    }
-
-    /* ── FEATURES ── */
-    .features {
+    /* ── FEATURE SECTIONS (alternating) ── */
+    .feature-section {
       padding: 100px 24px;
-      max-width: 1080px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
-    .section-label {
+    .feature-row {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+    }
+
+    .feature-row.reverse { flex-direction: row-reverse; }
+
+    .feature-phone {
+      flex-shrink: 0;
+      width: 280px;
+    }
+
+    .feature-phone img {
+      width: 100%;
+      border-radius: 28px;
+      border: 2px solid rgba(255,255,255,0.05);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.5),
+        0 0 0 1px rgba(124, 77, 219, 0.06);
+      display: block;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .feature-phone img:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 40px 100px rgba(0,0,0,0.6),
+        0 0 60px rgba(124, 77, 219, 0.08);
+    }
+
+    .feature-text { flex: 1; }
+
+    .feature-label {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--purple);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
-    .section-title {
+    .feature-label.purple { color: var(--purple); }
+    .feature-label.gold { color: var(--gold); }
+    .feature-label.green { color: var(--green); }
+
+    .feature-text h2 {
       font-family: var(--font-display);
-      font-size: clamp(28px, 4vw, 40px);
+      font-size: clamp(28px, 4vw, 38px);
       font-weight: 700;
       letter-spacing: -1px;
-      margin-bottom: 56px;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      transition: border-color 0.3s;
-    }
-
-    .feature-card:hover { border-color: rgba(124, 77, 219, 0.2); }
-
-    .feature-icon {
-      width: 44px; height: 44px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      line-height: 1.15;
       margin-bottom: 18px;
-      font-size: 20px;
     }
 
-    .feature-icon.purple { background: var(--purple-glow); }
-    .feature-icon.gold { background: var(--gold-dim); }
-    .feature-icon.green { background: rgba(34, 197, 94, 0.1); }
+    .feature-text p {
+      font-size: 16px;
+      color: var(--text-dim);
+      line-height: 1.75;
+      margin-bottom: 16px;
+      max-width: 460px;
+    }
 
-    .feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
-    .feature-card p { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+    .feature-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
 
-    /* ── HOW IT WORKS ── */
-    .how-it-works {
-      padding: 80px 24px 100px;
-      max-width: 800px;
+    .feature-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    .feature-pill.purple { background: var(--purple-glow); color: var(--purple); }
+    .feature-pill.gold { background: var(--gold-dim); color: var(--gold); }
+    .feature-pill.green { background: rgba(34,197,94,0.1); color: var(--green); }
+
+    /* Divider between features */
+    .feature-divider {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .feature-divider-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-phone {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.7s ease-out 0.15s, transform 0.7s ease-out 0.15s;
+    }
+
+    .reverse .reveal-phone {
+      transform: translateX(30px);
+    }
+
+    .reveal-phone.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-text {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.7s ease-out 0.25s, transform 0.7s ease-out 0.25s;
+    }
+
+    .reverse .reveal-text {
+      transform: translateX(-30px);
+    }
+
+    .reveal-text.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ── HADITH ── */
+    .hadith-section {
+      padding: 80px 24px;
+      text-align: center;
+      max-width: 600px;
       margin: 0 auto;
     }
 
-    .steps { display: flex; flex-direction: column; }
-
-    .step { display: flex; gap: 24px; }
-
-    .step-line {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .hadith-divider {
       width: 40px;
-      flex-shrink: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--purple), var(--gold));
+      margin: 0 auto 40px;
+      border-radius: 1px;
     }
-
-    .step-dot {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .step:nth-child(1) .step-dot { background: var(--purple-glow); color: var(--purple); }
-    .step:nth-child(2) .step-dot { background: var(--gold-dim); color: var(--gold); }
-    .step:nth-child(3) .step-dot { background: rgba(34,197,94,0.1); color: var(--green); }
-
-    .step-connector { width: 2px; flex-grow: 1; background: var(--border); min-height: 40px; }
-    .step-content { padding-bottom: 48px; }
-    .step-content h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-    .step-content p { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
 
     /* ── LEGAL ── */
     .legal {
@@ -371,7 +398,32 @@
       50% { opacity: 0.4; }
     }
 
-    /* ── MOBILE ── */
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .feature-row,
+      .feature-row.reverse {
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .feature-phone { width: 220px; }
+
+      .feature-text p { max-width: 100%; }
+
+      .feature-pills { justify-content: center; }
+
+      .reveal-phone,
+      .reverse .reveal-phone {
+        transform: translateY(30px);
+      }
+
+      .reveal-text,
+      .reverse .reveal-text {
+        transform: translateY(20px);
+      }
+    }
+
     @media (max-width: 640px) {
       .nav-links { display: none; }
       .hero { padding: 100px 20px 60px; }
@@ -379,7 +431,8 @@
       .hero h1 { letter-spacing: -1px; }
       .hero-buttons { flex-direction: column; width: 100%; }
       .btn { justify-content: center; }
-      .features-grid { grid-template-columns: 1fr; }
+      .feature-section { padding: 60px 20px; }
+      .feature-phone { width: 200px; }
       .footer-inner { flex-direction: column; gap: 16px; }
       .legal { padding: 100px 20px 60px; }
     }
@@ -395,7 +448,6 @@
   </a>
   <div class="nav-links">
     <a href="#features">Features</a>
-    <a href="#how-it-works">How It Works</a>
     <a href="#privacy">Privacy</a>
     <a href="#" class="nav-cta">Get the App</a>
   </div>
@@ -420,83 +472,103 @@
       Google Play
     </a>
   </div>
-  <p class="hero-arabic">بِسْمِ ٱللَّٰهِ تَوَكَّلْتُ عَلَى ٱللَّٰهِ</p>
 </section>
 
-<!-- ════ FEATURES ════ -->
-<section class="features" id="features">
-  <p class="section-label">Features</p>
-  <h2 class="section-title">Everything you need for a prayer-conscious journey</h2>
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon purple">🕌</div>
-      <h3>Mosque-Aware Routing</h3>
-      <p>Safr finds mosques along your route corridor and suggests the best stops based on which prayers fall during your drive — sorted by shortest detour.</p>
+<!-- ════ FEATURE 1: NAVIGATION ════ -->
+<div id="features"></div>
+<section class="feature-section">
+  <div class="feature-row">
+    <div class="feature-phone reveal-phone">
+      <img src="screenshot_nav.png" alt="Turn-by-turn navigation with mosque stops">
     </div>
-    <div class="feature-card">
-      <div class="feature-icon gold">⏰</div>
-      <h3>Live Prayer Alerts</h3>
-      <p>Get notified when a prayer window opens while you're driving. Tap the alert to see nearby mosques and reroute with one tap — no fumbling with your phone.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon green">🧭</div>
-      <h3>Turn-by-Turn Navigation</h3>
-      <p>Full voice-guided navigation with speed display, multi-stop support, and automatic rerouting. Mosque stops are seamlessly integrated into your route.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon purple">📿</div>
-      <h3>Dua e-Safar</h3>
-      <p>Start every journey with the travel supplication. Audio recitation with page-by-page Arabic, transliteration, and translation — plays automatically on your first drive.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon gold">🧭</div>
-      <h3>Qibla Compass</h3>
-      <p>Live compass with calibration flow. When you're facing the Qibla, the app confirms it — useful for praying at rest stops when there's no mosque nearby.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon green">🕐</div>
-      <h3>Prayer Times</h3>
-      <p>Accurate prayer times calculated for your exact GPS location using North American calculation methods (ISNA, MWL). Updates automatically as you travel across time zones.</p>
+    <div class="feature-text reveal-text">
+      <p class="feature-label purple">Navigation</p>
+      <h2>Turn-by-turn guidance to every prayer stop</h2>
+      <p>Full voice-guided navigation with your mosque stops built right into the route. See distance and estimated time to each stop, with automatic rerouting if you go off course.</p>
+      <div class="feature-pills">
+        <span class="feature-pill purple">Voice guidance</span>
+        <span class="feature-pill purple">Auto-reroute</span>
+        <span class="feature-pill purple">Speed display</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ════ HOW IT WORKS ════ -->
-<section class="how-it-works" id="how-it-works">
-  <p class="section-label">How It Works</p>
-  <h2 class="section-title">Three steps to a prayer-planned drive</h2>
-  <div class="steps">
-    <div class="step">
-      <div class="step-line">
-        <div class="step-dot">1</div>
-        <div class="step-connector"></div>
-      </div>
-      <div class="step-content">
-        <h3>Enter your destination</h3>
-        <p>Search for any address or business in the US and Canada. Safr calculates your route and identifies which prayers will occur during your drive.</p>
-      </div>
+<div class="feature-divider"><div class="feature-divider-line"></div></div>
+
+<!-- ════ FEATURE 2: PRAYER PLAN ════ -->
+<section class="feature-section">
+  <div class="feature-row reverse">
+    <div class="feature-phone reveal-phone">
+      <img src="screenshot_plan.jpg" alt="Prayer-aware route planning">
     </div>
-    <div class="step">
-      <div class="step-line">
-        <div class="step-dot">2</div>
-        <div class="step-connector"></div>
-      </div>
-      <div class="step-content">
-        <h3>Choose your mosque stops</h3>
-        <p>For each prayer, Safr shows the best mosques along your route — sorted by detour time. Pick the ones that work for you, or let the app suggest stops automatically.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-line">
-        <div class="step-dot">3</div>
-        <div class="step-connector"></div>
-      </div>
-      <div class="step-content">
-        <h3>Drive with peace of mind</h3>
-        <p>Navigate with voice guidance, mosque stops built into your route, and live prayer alerts. If a new prayer time approaches, Safr finds the nearest mosque and offers to reroute you.</p>
+    <div class="feature-text reveal-text">
+      <p class="feature-label gold">Route Planning</p>
+      <h2>Every prayer, planned before you leave</h2>
+      <p>Safr scans your entire route for mosques and maps them to the prayers that fall during your drive. See which mosques you'll pass for each salah, sorted by shortest detour. Add stops with one tap.</p>
+      <div class="feature-pills">
+        <span class="feature-pill gold">Mosque-first algorithm</span>
+        <span class="feature-pill gold">Detour ranking</span>
+        <span class="feature-pill gold">Multi-stop</span>
       </div>
     </div>
   </div>
+</section>
+
+<div class="feature-divider"><div class="feature-divider-line"></div></div>
+
+<!-- ════ FEATURE 3: PRAYER TIMES ════ -->
+<section class="feature-section">
+  <div class="feature-row">
+    <div class="feature-phone reveal-phone">
+      <img src="screenshot_prayer.png" alt="Accurate prayer times">
+    </div>
+    <div class="feature-text reveal-text">
+      <p class="feature-label green">Prayer Times</p>
+      <h2>Accurate times wherever you are</h2>
+      <p>Prayer times calculated for your exact GPS coordinates using North American methods (ISNA, MWL). As you drive across time zones, times update automatically — no manual adjustment needed.</p>
+      <div class="feature-pills">
+        <span class="feature-pill green">GPS-accurate</span>
+        <span class="feature-pill green">ISNA & MWL</span>
+        <span class="feature-pill green">Live alerts</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="feature-divider"><div class="feature-divider-line"></div></div>
+
+<!-- ════ FEATURE 4: DUA E-SAFAR ════ -->
+<section class="feature-section">
+  <div class="feature-row reverse">
+    <div class="feature-phone reveal-phone">
+      <img src="screenshot_dua.png" alt="Dua e-Safar recitation">
+    </div>
+    <div class="feature-text reveal-text">
+      <p class="feature-label gold">Dua e-Safar</p>
+      <h2>Start every journey with barakah</h2>
+      <p>The travel supplication presented page by page — Arabic text, transliteration, and English translation. Audio recitation plays automatically on your first drive so you can follow along.</p>
+      <div class="feature-pills">
+        <span class="feature-pill gold">Audio recitation</span>
+        <span class="feature-pill gold">Arabic + translation</span>
+        <span class="feature-pill gold">Sahih Muslim 1342</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ HADITH ════ -->
+<section class="hadith-section reveal">
+  <div class="hadith-divider"></div>
+  <p style="font-size: 22px; color: rgba(212, 168, 67, 0.55); font-weight: 300; line-height: 1.8; margin-bottom: 16px; direction: rtl;">
+    مَنْ غَدَا إِلَى الْمَسْجِدِ وَرَاحَ أَعَدَّ اللَّهُ لَهُ نُزُلَهُ مِنَ الْجَنَّةِ كُلَّمَا غَدَا أَوْ رَاحَ
+  </p>
+  <p style="font-size: 14px; color: rgba(255,255,255,0.3); font-style: italic; line-height: 1.7; margin-bottom: 8px;">
+    "Allah will prepare for him who goes to the mosque every morning and in the afternoon an honorable place in Paradise for every morning and afternoon going."
+  </p>
+  <p style="font-size: 11px; color: rgba(255,255,255,0.16);">
+    — Sahih al-Bukhari 662, Narrated Abu Huraira (RA)
+  </p>
 </section>
 
 <!-- ════ PRIVACY POLICY ════ -->
@@ -540,7 +612,6 @@
 
   <div class="legal-divider"></div>
 
-  <!-- ════ TERMS OF USE ════ -->
   <div id="terms">
     <h2>Terms of Use</h2>
     <p class="updated">Last updated: February 28, 2026</p>
@@ -585,6 +656,24 @@
     </div>
   </div>
 </footer>
+
+<!-- ════ SCROLL REVEAL ════ -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.reveal, .reveal-phone, .reveal-text').forEach(el => {
+    observer.observe(el);
+  });
+</script>
 
 </body>
 </html>
