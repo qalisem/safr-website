@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safr — Never Miss a Prayer on the Road</title>
+  <meta name="description" content="Safr is a prayer-aware navigation app for Muslim travelers. Find mosques along your route, get prayer alerts while driving, and never miss salah on the road.">
+  <meta name="theme-color" content="#0A0A0F">
+  <meta property="og:title" content="Safr — Prayer-Aware Navigation">
+  <meta property="og:description" content="Never miss a prayer on the road. Safr finds mosques along your route and alerts you when it's time to pray.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getsafr.app">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0A0A0F;
+      --bg-card: #111118;
+      --bg-elevated: #16161F;
+      --purple: #7C4DDB;
+      --purple-glow: rgba(124, 77, 219, 0.15);
+      --gold: #D4A843;
+      --gold-dim: rgba(212, 168, 67, 0.12);
+      --green: #22C55E;
+      --text: #EEEEF0;
+      --text-dim: rgba(255,255,255,0.55);
+      --text-muted: rgba(255,255,255,0.3);
+      --border: rgba(255,255,255,0.06);
+      --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Segoe UI', system-ui, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .nav-brand {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -1px;
+    }
+
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--purple) !important;
+      color: white !important;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: opacity 0.2s;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(124, 77, 219, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-logo {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin-bottom: 32px;
+      animation: fadeInUp 0.6s ease-out;
+      filter: drop-shadow(0 0 40px rgba(124, 77, 219, 0.2));
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px 6px 8px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(212, 168, 67, 0.2);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+      margin-bottom: 32px;
+      animation: fadeInUp 0.6s ease-out 0.1s both;
+    }
+
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 7vw, 72px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      max-width: 700px;
+      animation: fadeInUp 0.6s ease-out 0.2s both;
+    }
+
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--purple), #A78BFA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 19px);
+      color: var(--text-dim);
+      max-width: 520px;
+      margin-top: 24px;
+      font-weight: 400;
+      line-height: 1.7;
+      animation: fadeInUp 0.6s ease-out 0.3s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 40px;
+      animation: fadeInUp 0.6s ease-out 0.4s both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary { background: var(--purple); color: white; }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(124, 77, 219, 0.3); }
+    .btn-secondary { background: var(--bg-elevated); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.15); }
+    .btn svg { width: 18px; height: 18px; }
+
+    .hero-arabic {
+      margin-top: 56px;
+      font-size: 28px;
+      color: var(--gold);
+      opacity: 0.4;
+      font-weight: 300;
+      letter-spacing: 2px;
+      animation: fadeInUp 0.6s ease-out 0.5s both;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 100px 24px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 56px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.3s;
+    }
+
+    .feature-card:hover { border-color: rgba(124, 77, 219, 0.2); }
+
+    .feature-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      font-size: 20px;
+    }
+
+    .feature-icon.purple { background: var(--purple-glow); }
+    .feature-icon.gold { background: var(--gold-dim); }
+    .feature-icon.green { background: rgba(34, 197, 94, 0.1); }
+
+    .feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+
+    /* ── HOW IT WORKS ── */
+    .how-it-works {
+      padding: 80px 24px 100px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .steps { display: flex; flex-direction: column; }
+
+    .step { display: flex; gap: 24px; }
+
+    .step-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 40px;
+      flex-shrink: 0;
+    }
+
+    .step-dot {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step:nth-child(1) .step-dot { background: var(--purple-glow); color: var(--purple); }
+    .step:nth-child(2) .step-dot { background: var(--gold-dim); color: var(--gold); }
+    .step:nth-child(3) .step-dot { background: rgba(34,197,94,0.1); color: var(--green); }
+
+    .step-connector { width: 2px; flex-grow: 1; background: var(--border); min-height: 40px; }
+    .step-content { padding-bottom: 48px; }
+    .step-content h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .step-content p { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+
+    /* ── LEGAL ── */
+    .legal {
+      padding: 120px 24px 80px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .legal h2 {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .legal .updated { font-size: 13px; color: var(--text-muted); margin-bottom: 40px; }
+    .legal h3 { font-size: 17px; font-weight: 700; margin-top: 36px; margin-bottom: 10px; color: var(--text); }
+    .legal p, .legal li { font-size: 14px; color: var(--text-dim); line-height: 1.75; margin-bottom: 12px; }
+    .legal ul { padding-left: 20px; margin-bottom: 16px; }
+    .legal li { margin-bottom: 6px; }
+    .legal a { color: var(--purple); }
+    .legal-divider { width: 100%; height: 1px; background: var(--border); margin: 80px 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy { font-size: 13px; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text-dim); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero { padding: 100px 20px 60px; }
+      .hero-logo { width: 90px; height: 90px; }
+      .hero h1 { letter-spacing: -1px; }
+      .hero-buttons { flex-direction: column; width: 100%; }
+      .btn { justify-content: center; }
+      .features-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; gap: 16px; }
+      .legal { padding: 100px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════ NAV ════ -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="safr_logo.png" alt="Safr">
+    <span class="nav-brand">Safr</span>
+  </a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#privacy">Privacy</a>
+    <a href="#" class="nav-cta">Get the App</a>
+  </div>
+</nav>
+
+<!-- ════ HERO ════ -->
+<section class="hero">
+  <img src="safr_logo.png" alt="Safr Logo" class="hero-logo">
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    Beta — Now Available
+  </div>
+  <h1>Never miss a <span class="accent">prayer</span> on the road</h1>
+  <p class="hero-sub">Safr plans your route around salah. Get mosque stop suggestions, prayer time alerts while driving, and turn-by-turn navigation — built for Muslim travelers in North America.</p>
+  <div class="hero-buttons">
+    <a href="#" class="btn btn-primary">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.97 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5M13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+      App Store
+    </a>
+    <a href="#" class="btn btn-secondary">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.61 3 21.09 3 20.5M16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12M20.16 10.81C20.5 11.08 20.75 11.5 20.75 12C20.75 12.5 20.53 12.9 20.18 13.18L17.89 14.5L15.39 12L17.89 9.5L20.16 10.81M6.05 2.66L16.81 8.88L14.54 11.15L6.05 2.66Z"/></svg>
+      Google Play
+    </a>
+  </div>
+  <p class="hero-arabic">بِسْمِ ٱللَّٰهِ تَوَكَّلْتُ عَلَى ٱللَّٰهِ</p>
+</section>
+
+<!-- ════ FEATURES ════ -->
+<section class="features" id="features">
+  <p class="section-label">Features</p>
+  <h2 class="section-title">Everything you need for a prayer-conscious journey</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon purple">🕌</div>
+      <h3>Mosque-Aware Routing</h3>
+      <p>Safr finds mosques along your route corridor and suggests the best stops based on which prayers fall during your drive — sorted by shortest detour.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon gold">⏰</div>
+      <h3>Live Prayer Alerts</h3>
+      <p>Get notified when a prayer window opens while you're driving. Tap the alert to see nearby mosques and reroute with one tap — no fumbling with your phone.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon green">🧭</div>
+      <h3>Turn-by-Turn Navigation</h3>
+      <p>Full voice-guided navigation with speed display, multi-stop support, and automatic rerouting. Mosque stops are seamlessly integrated into your route.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon purple">📿</div>
+      <h3>Dua e-Safar</h3>
+      <p>Start every journey with the travel supplication. Audio recitation with page-by-page Arabic, transliteration, and translation — plays automatically on your first drive.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon gold">🧭</div>
+      <h3>Qibla Compass</h3>
+      <p>Live compass with calibration flow. When you're facing the Qibla, the app confirms it — useful for praying at rest stops when there's no mosque nearby.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon green">🕐</div>
+      <h3>Prayer Times</h3>
+      <p>Accurate prayer times calculated for your exact GPS location using North American calculation methods (ISNA, MWL). Updates automatically as you travel across time zones.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ HOW IT WORKS ════ -->
+<section class="how-it-works" id="how-it-works">
+  <p class="section-label">How It Works</p>
+  <h2 class="section-title">Three steps to a prayer-planned drive</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-line">
+        <div class="step-dot">1</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-content">
+        <h3>Enter your destination</h3>
+        <p>Search for any address or business in the US and Canada. Safr calculates your route and identifies which prayers will occur during your drive.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line">
+        <div class="step-dot">2</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-content">
+        <h3>Choose your mosque stops</h3>
+        <p>For each prayer, Safr shows the best mosques along your route — sorted by detour time. Pick the ones that work for you, or let the app suggest stops automatically.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line">
+        <div class="step-dot">3</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-content">
+        <h3>Drive with peace of mind</h3>
+        <p>Navigate with voice guidance, mosque stops built into your route, and live prayer alerts. If a new prayer time approaches, Safr finds the nearest mosque and offers to reroute you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PRIVACY POLICY ════ -->
+<section class="legal" id="privacy">
+  <h2>Privacy Policy</h2>
+  <p class="updated">Last updated: February 28, 2026</p>
+
+  <h3>Overview</h3>
+  <p>Safr ("we," "our," or "the app") is a navigation app designed for Muslim travelers. We are committed to protecting your privacy. This policy explains what data we collect, how we use it, and your rights.</p>
+
+  <h3>Data We Collect</h3>
+  <p><strong>Location data</strong> — Safr uses your device's GPS to provide navigation, calculate prayer times for your current position, determine Qibla direction, and find nearby mosques. Location data is processed on your device and sent to mapping services (Mapbox, Google Places) only as needed for routing and place search. We do not store your location history on our servers.</p>
+  <p><strong>Locally stored preferences</strong> — Your settings (prayer calculation method, madhab, corridor width, saved locations like Home/Work, recent destinations) are stored locally on your device using SharedPreferences. This data never leaves your device.</p>
+  <p><strong>No accounts or personal information</strong> — Safr does not require an account. We do not collect your name, email, phone number, or any other personal identifiers.</p>
+
+  <h3>Third-Party Services</h3>
+  <p>Safr uses the following third-party services to function:</p>
+  <ul>
+    <li><strong>Mapbox</strong> — Map display, turn-by-turn navigation, and geocoding. Subject to <a href="https://www.mapbox.com/legal/privacy">Mapbox's Privacy Policy</a>.</li>
+    <li><strong>Google Places API</strong> — Place search and business information. Subject to <a href="https://policies.google.com/privacy">Google's Privacy Policy</a>.</li>
+    <li><strong>OpenStreetMap</strong> — Mosque location data sourced from the OSM community database. Subject to the <a href="https://osmfoundation.org/wiki/Privacy_Policy">OSM Foundation Privacy Policy</a>. Data © OpenStreetMap contributors.</li>
+  </ul>
+  <p>These services receive location coordinates as needed to provide their functionality. We do not share any additional data with them.</p>
+
+  <h3>Data We Do NOT Collect</h3>
+  <ul>
+    <li>We do not track your browsing or app usage behavior</li>
+    <li>We do not sell or share data with advertisers</li>
+    <li>We do not use analytics or tracking SDKs</li>
+    <li>We do not store your routes, destinations, or travel history on any server</li>
+  </ul>
+
+  <h3>Children's Privacy</h3>
+  <p>Safr is not directed at children under 13. We do not knowingly collect data from children.</p>
+
+  <h3>Changes to This Policy</h3>
+  <p>We may update this policy as the app evolves. The "last updated" date at the top will reflect any changes. Continued use of Safr after updates constitutes acceptance of the revised policy.</p>
+
+  <h3>Contact</h3>
+  <p>Questions about privacy? Reach us at <a href="mailto:privacy@getsafr.app">privacy@getsafr.app</a>.</p>
+
+  <div class="legal-divider"></div>
+
+  <!-- ════ TERMS OF USE ════ -->
+  <div id="terms">
+    <h2>Terms of Use</h2>
+    <p class="updated">Last updated: February 28, 2026</p>
+
+    <h3>Acceptance</h3>
+    <p>By downloading or using Safr, you agree to these terms. If you do not agree, do not use the app.</p>
+
+    <h3>What Safr Is</h3>
+    <p>Safr is a navigation app that integrates Islamic prayer times and mosque locations into route planning. It is designed to help Muslim travelers plan prayer stops during road trips.</p>
+
+    <h3>What Safr Is NOT</h3>
+    <p>Safr is not a replacement for your own judgment while driving. Prayer times are calculated algorithmically and may differ slightly from your local mosque's announced times. Mosque information is sourced from public databases and may not always be current (hours, open/closed status, etc.).</p>
+
+    <h3>Safe Driving</h3>
+    <p>Do not interact with the app while driving. Set up your route before you start driving. Voice guidance and prayer alerts are designed to minimize the need to look at your screen. You are solely responsible for safe operation of your vehicle.</p>
+
+    <h3>Accuracy</h3>
+    <p>We strive for accuracy in prayer times, mosque locations, and routing, but we cannot guarantee perfection. Prayer times are calculated using established North American astronomical methods (ISNA, MWL) and may vary by 1-2 minutes from other sources. Mosque data comes from OpenStreetMap and Google Places and may contain inaccuracies.</p>
+
+    <h3>Availability</h3>
+    <p>Safr is currently available in the United States and Canada. Mosque coverage and routing quality may vary by region. The app requires an internet connection for navigation and mosque search.</p>
+
+    <h3>Limitation of Liability</h3>
+    <p>Safr is provided "as is" without warranties of any kind. We are not liable for missed prayers, incorrect directions, or any damages arising from use of the app. Use Safr as one tool among many to plan your journey.</p>
+
+    <h3>Changes</h3>
+    <p>We may modify these terms at any time. Continued use after changes constitutes acceptance.</p>
+
+    <h3>Contact</h3>
+    <p>Questions? Email <a href="mailto:hello@getsafr.app">hello@getsafr.app</a>.</p>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-copy">&copy; 2026 Safr. Made with tawakkul.</p>
+    <div class="footer-links">
+      <a href="#privacy">Privacy</a>
+      <a href="#terms">Terms</a>
+      <a href="mailto:hello@getsafr.app">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
